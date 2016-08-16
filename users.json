@@ -1,0 +1,47 @@
+[
+    {
+        "id": "1",
+        "name": "John Smith",
+        "email": "john.smith@email.com"
+    },
+    {
+        "id": "2",
+        "name": "Albert Einstein",
+        "email": "albert.einstein@email.com"
+    },
+    {
+        "id": "3",
+        "name": "Mark Zuckerberg",
+        "email": "mark.zuckerberg@email.com"
+    },
+    {
+        "id": "4",
+        "name": "Steve Jobs",
+        "email": "steve.jobs@email.com"
+    },
+    {
+        "id": "5",
+        "name": "Bill Gates",
+        "email": "bill.gates@email.com"
+    },
+    {
+        "id": "6",
+        "name": "John Smith",
+        "email": "john.smith@email.com"
+    },
+    {
+        "id": "7",
+        "name": "Warren Buffet",
+        "email": "warren.buffet@email.com"
+    },
+    {
+        "id": "8",
+        "name": "Neil DeGrasse Tyson",
+        "email": "neil.tyson@email.com"
+    },
+    {
+        "id": "9",
+        "name": "Christopher Hitchens",
+        "email": "chris.hitch@email.com"
+    }
+]

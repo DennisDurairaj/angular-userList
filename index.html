@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="usersApp" ng-cloak>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Starter Template for Bootstrap 3.3.7</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-top" role="navigation">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="navbar-header logo-image">
+                <a class="navbar-brand" href="#"><img src="img/logo.png"></a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="web-url"><a href="#">www.positionly.com</a></li>
+
+                </ul>
+            </div>
+            <!--.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="row" ng-controller="usersCtrl as usersList">
+        <div class="col-md-8 col-md-offset-2 main-container">
+            <div class="row white-background">
+                <button class="btn btn-color" ng-click="usersList.showForm()" ng-hide="usersList.formDisplayToggle" ng-show="usersList.btnDisable" ng-disabled="usersList.users.length >= 10"><span class="glyphicon glyphicon-plus-sign"></span><b> Add User</b></button>
+                <span ng-show="usersList.successfulAdd"><span class="glyphicon glyphicon-ok success-glyph"></span><b> Successfully added user!</b></span>
+                <span ng-if="usersList.users.length >= 10"><span class="glyphicon glyphicon-exclamation-sign warn-glyph"></span><b> Cannot add more users, limit reached</b></span>
+                <form name="userForm" ng-submit="usersList.submitForm(userForm.$valid)" class="form-inline" ng-show="usersList.formDisplayToggle" novalidate>
+                    <div style="display: inline" ng-messages="" ng-class="{ 'has-error' : userForm.name.$pristine && usersList.submitted || userForm.name.$invalid && !userForm.name.$pristine && usersList.submitted }">
+                        <input type="text" name="name" placeholder="Name" class="form-control" ng-maxlength="20" ng-model="usersList.name" ng-change="usersList.resetField()" ng-pattern="usersList.namePattern" autofocus required>
+                        <div ng-messages="userForm.name.$error" ng-if="userForm.name.$invalid && usersList.submitted" style="display: inline">
+                            <span ng-message="required"><span class="glyphicon glyphicon-exclamation-sign"></span> Name required</span>
+                            <span ng-message="maxlength"><span class="glyphicon glyphicon-exclamation-sign"></span> Max 20 characters</span>
+                            <span ng-message="pattern"><span class="glyphicon glyphicon-exclamation-sign"></span> No numbers allowed</span>
+                        </div>
+                    </div>
+                    <div style="display: inline" ng-class="{ 'has-error' : userForm.email.$pristine && usersList.submitted || userForm.email.$invalid && !userForm.email.$pristine && usersList.submitted }">
+                        <input type="email" name="email" placeholder="Email" class="form-control" ng-model="usersList.email" ng-change="usersList.resetField()" ng-pattern="usersList.emailPattern" required>
+                        <div ng-messages="userForm.email.$error" ng-if="userForm.email.$invalid && usersList.submitted" style="display: inline">
+                            <span ng-message="required"><span class="glyphicon glyphicon-exclamation-sign"></span> Email required</span>
+                            <span ng-message="pattern"><span class="glyphicon glyphicon-exclamation-sign"></span> Invalid Email</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success"><b>Submit</b></button>
+                    <a href="#" class="reset-form" ng-click="usersList.resetForm()" ng-if="usersList.resetDisplay">Reset fields</a>
+                    <p style="display: inline" ng-show="usersList.alertExists"><span class="glyphicon glyphicon-exclamation-sign warn-glyph"></span> This user already exists</p>
+                    <p style="display: inline" ng-show="usersList.alertLimit"><span class="glyphicon glyphicon-exclamation-sign warn-glyph"></span> Cannot add more users, limit reached</p>
+                </form>
+            </div>
+            <div class="row col-heads">
+                <div class="col col-md-3 center-text"><b>LP</b></div>
+                <div class="col col-md-3"><b>USER</b></div>
+                <div class="col col-md-6"><b>EMAIL</b></div>
+            </div>
+            <div class="row">
+                <div class="user-styles" ng-repeat="(key,value) in usersList.users">
+                    <div class="col col-md-3 center-text"><span class="id-style">{{ key + 1 }}</span></div>
+                    <div class="col col-md-3">{{ value.name }}</div>
+                    <div class="col col-md-6">{{ value.email }}<a class="pull-right" href="#" ng-click="usersList.deleteRow(key)"><span class="glyphicon glyphicon-remove delete-glyph"></span></a>
+                    </div>
+                </div>
+                <div ng-if="usersList.users.length == 0">Add a user!</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="vendor/js/jquery-3.0.0.js"></script>
+    <script src="/vendor/js/bootstrap.min.js"></script>
+    <script src="vendor/js/angular.min.js"></script>
+    <script src="vendor/js/angular-resource.js"></script>
+    <script src="vendor/js/angular-messages.min.js"></script>
+    <script src="vendor/js/angular-route.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/dataService.js"></script>
+    <script src="js/controllers/usersCtrl.js"></script>
+</body>
+
+</html>
